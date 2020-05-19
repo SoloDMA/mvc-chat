@@ -1,0 +1,53 @@
+﻿@model IndexViewModel
+@{
+    ViewData["Title"] = "Main chat page";
+
+}
+
+
+<div id="chat-container">
+    @if (Model.ErrorsExists)
+    {
+        <h1 class="error">@Model.ErrorDiscription <a asp-controller="Home" asp-action="Index" asp-route-currentRoomId="@Model.CurrentRoomId">Попробуйте снова</a></h1>
+    }
+    <div id="chat-rooms">
+        @await Component.InvokeAsync("User")
+        @await Component.InvokeAsync("ChatRooms")
+        <div id="place-for-add-room-button">
+            <a href="#open-modal-add-room" id="add-room-button">+</a>
+            <div id="open-modal-add-room" class="modal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 class="modal-title">Создание новой чат-комнаты</h3>
+                            <a href="#close-modal-add-room" title="Close" class="close">×</a>
+                        </div>
+                        <div class="modal-body">
+                            <form asp-controller="Home" asp-action="CreateChatRoom" method="post">
+                                <input type="text" placeholder="Введите название команты" name="roomName">
+                                <button type="submit">Создать</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="chat-messages">
+        @await Component.InvokeAsync("CurrentRoomInfo")
+        @await Component.InvokeAsync("RoomMessages")
+        <div id="place-for-sending-form">
+            @if (Model != null)
+            {
+                <form id="message-sending-form" asp-controller="Home" asp-action="AddMessage" method="post">
+                    <textarea name="messageText" id="message-text" cols="30" rows="10"></textarea>
+                    <input name="roomId" value="@Model.CurrentRoomId" type="hidden">
+                    <button type="submit">Отправить</button>
+                </form>
+            }
+
+        </div>
+    </div>
+</div>
+
+<script src="~/js/site.js"></script>

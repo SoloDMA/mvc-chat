@@ -1,0 +1,58 @@
+﻿@model RoomModel
+
+@{ 
+    Layout = null;
+}
+
+<div id="room-panel">
+
+
+    @if (Model != null)
+    {
+        <span id="room-name">@Model.Name</span>
+        <input id="messages-search" type="text" placeholder="Поиск по сообщениям">
+        <div id="three-dots-button">
+            <span>.</span>
+            <span>.</span>
+            <span>.</span>
+            <ul id="chat-menu">
+                <li><a href="#open-modal-add-companion">Добавить пользователя</a></li>
+                @{
+
+                    var currentUserName = User.Claims.ToList()[0].Value;
+                    if (Model.CreatorName == currentUserName)
+                    {
+                        <li><a asp-controller="Home" asp-action="DeleteRoom" asp-route-currentRoomId="@Model.Id">Удалить чат</a></li>
+                    }
+                    else
+                    {
+
+                        <li><a asp-controller="Home" asp-action="LogOutFromRoom">Выйти из чата</a></li>
+                    }
+                }
+
+            </ul>
+        </div>
+
+        <div id="open-modal-add-companion" class="modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">Кого добавить в комнату?</h3>
+                    <a href="#close-modal-add-companion" title="Close" class="close">×</a>
+                </div>
+                <div class="modal-body">
+                    <form asp-controller="Home" asp-action="AddUserInRoom" method="post">
+                        <input type="text" placeholder="Введите имя пользователя" name="userName">
+                        <input name="roomId" value="@Model.Id" type="hidden">
+                        <button type="submit">Добавить</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    }
+
+
+    
+</div>

@@ -1,0 +1,23 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - Chat</title>
+    <link rel="stylesheet" href="~/css/site.css">
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+</head>
+<body>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <header id="header">
+            <a asp-controller="Home" asp-action="Index">Главная</a>
+            <a asp-controller="Account" asp-action="ProfileInfo">Профиль</a>
+            <a href="#">Правила чата</a>
+            <a asp-controller="Account" asp-action="LogOut">Выйти</a>
+        </header>
+    }
+
+    @RenderBody()
+</body>
+</html>

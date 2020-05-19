@@ -1,0 +1,27 @@
+﻿@model string
+
+@{
+    ViewData["Title"] = "Sign up page";
+}
+
+<div id="signup-page-bg">
+    @if (Model != null)
+    {
+        <h1 class="error">@Model</h1>
+    }
+    <div id="signup-container">
+        <h1>Добро пожаловать в чат!</h1>
+        <form id="signup-form" asp-controller="Account" asp-action="SignUp" method="post">
+            <label id="signup-label">Введите логин, пароль и пол для регистрации в чате</label>
+            <input type="text" name="username" placeholder="Имя пользователя..." required>
+            <input type="password" name="password" placeholder="Пароль..." required>
+            <select required name="sex">
+                <option value="0" selected disabled hidden>Выберите пол</option>
+                <option value="m">Мужской</option>
+                <option value="f">Женский</option>
+            </select>
+            <button type="submit">Зарегистрироваться</button>
+            <button type="button"><a asp-controller="Account", asp-action="LogIn">Войти</a></button>
+        </form>
+    </div>
+</div>

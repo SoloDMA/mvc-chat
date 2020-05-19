@@ -1,0 +1,27 @@
+﻿@model string
+
+@{
+    ViewData["Title"] = "Sign in page";
+}
+
+
+
+<div id="login-page-bg">
+    @if (Model != null)
+    {
+        <h1 class="error">@Model</h1>
+    }
+    <div id="login-container">
+        <h1>Добро пожаловать в чат!</h1>
+        <form id="login-form" asp-controller="Account" asp-action="LogIn" method="post">
+            <label id="login-label">Введите логин и пароль для входа в чат</label>
+            <input type="text" name="username" placeholder="Имя пользователя..." required>
+            <input type="password" name="password" placeholder="Пароль..." required>
+            <button id="submit-login-form" type="submit">Войти</button>
+            <button type="button"><a asp-controller="Account" asp-action="SignUp">Регистрация</a></button>
+        </form>
+    </div>
+</div>
+
+<script src="~/js/account.js"></script>
+

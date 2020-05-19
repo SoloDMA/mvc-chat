@@ -1,0 +1,29 @@
+﻿@model IEnumerable<UserMessageModel>
+
+<div id="place-for-messages">
+    @if (Model != null)
+    {
+        var currentUserId = Context.Request.Cookies["_uid"];
+
+        foreach (var message in Model)
+        {
+            if (message.UserMessage.SenderId == currentUserId)
+            {
+                <message current-user-message="true">
+                    <a href="/Home/DeleteMessage?messageId=@message.UserMessage.Id&roomId=@Context.Request.Query["currentRoomId"].ToString()" class="delete-message-button">x</a>
+                    <avatar src="data:image/jpeg;base64,@(Convert.ToBase64String(message.Sender.Avatar))" sender="true" />
+                    <p>@message.UserMessage.Text</p>
+                    <span class="time-left">@message.UserMessage.Time</span>
+                </message>
+            }
+            else
+            {
+                <message current-user-message="false">
+                    <avatar src="data:image/jpeg;base64,@(Convert.ToBase64String(message.Sender.Avatar))" sender="false" />
+                    <p>@message.UserMessage.Text</p>
+                    <span class="time-right">@message.UserMessage.Time</span>
+                </message>
+            }
+        }
+    }
+</div>

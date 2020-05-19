@@ -1,0 +1,633 @@
+﻿
+/*#region LogIn and SignUp pages */
+
+/*#region vars */
+
+:root {
+    --login-signup-container-width: 500px;
+    --login--signup-container-height: 250px;
+}
+
+/*#endregion */
+
+/*#region styles */
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+    body #login-page-bg, body #signup-page-bg {
+        height: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, rgba(142,6,6,1) 0%, rgba(20,33,103,0.8508831521739131) 22%, rgba(55,152,139,1) 68%, rgba(220,0,255,1) 100%);
+    }
+
+#login-container {
+    position: relative;
+    width: var(--login-signup-container-width);
+    height: var(--login--signup-container-height);
+    border: 1px solid white;
+    border-radius: 10px;
+    left: calc(50% - calc(var(--login-signup-container-width) / 2));
+    top: calc(50% - var(--login--signup-container-height) / 2);
+}
+
+#signup-container {
+    position: relative;
+    width: var(--login-signup-container-width);
+    height: calc(var(--login--signup-container-height) + 50px);
+    border: 1px solid white;
+    border-radius: 10px;
+    left: calc(50% - calc(var(--login-signup-container-width) / 2));
+    top: calc(50% - var(--login--signup-container-height) / 2);
+}
+
+#login-form, #signup-form {
+    margin: 0 10px 0 10px;
+}
+
+#login-container h1, #signup-container h1 {
+    color: #ffffff87;
+    text-align: center;
+}
+
+#login-form input, #signup-form input, select {
+    background-color: rgba(0,0,0,0);
+    border: none;
+    border-bottom: 1px solid #ffffff87;
+    margin: 10px 0 10px 0;
+    width: 100%;
+    height: 30px;
+    font: 100 20px arial Roboto;
+    color: #ffffff87;
+}
+
+select {
+    color: #ffffff87;
+}
+
+    select > option[selected] {
+        color: grey;
+    }
+
+    select > option {
+        color: black;
+    }
+
+#login-label, #signup-label {
+    color: #ffffff87;
+    display: block;
+    font-size: 20px;
+    font-weight: 400;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+#signup-form button[type="button"] a, #login-form button[type="button"] a {
+    display: inline;
+    width: 100%;
+    height: 100%;
+    cursor: default;
+    color: black;
+    text-decoration: none;
+}
+
+
+#login-form button[type="button"] {
+    position: relative;
+    left: 330px;
+}
+
+#signup-form button[type="button"] {
+    position: relative;
+    left: 280px;
+}
+
+/*#endregion */
+
+/*#endregion */
+
+
+/*#region Main page */
+
+/*#region styles */
+
+#header {
+    display: flex;
+    height: 50px;
+    width: 100%;
+    background-color: #e0e0ef;
+    position: fixed;
+    top: 0;
+    z-index: 1;
+    box-shadow: 0 0 10px black;
+    padding-left: calc(50% - 800px);
+    padding-right: calc(50% - 800px);
+}
+
+    #header a {
+        width: 400px;
+        text-align: center;
+        text-decoration: none;
+        font: 20px "Times New Roman";
+        padding-top: 15px;
+        color: black;
+        letter-spacing: 2px;
+        border: 1px solid #0000001c;
+    }
+
+        #header a:first-child {
+            border-left: none;
+            border-right: 1px solid #0000001c;
+        }
+
+        #header a:last-child {
+            border-right: none;
+            border-left: 1px solid #0000001c;
+        }
+
+        #header a:hover {
+            background-color: #27272742;
+        }
+
+#chat-container {
+    height: 700px;
+    margin: 100px 350px 0 350px;
+    border: 1px solid grey;
+    border-radius: 5px;
+    display: flex;
+}
+
+#chat-rooms {
+    width: 30%;
+    height: 100%;
+    padding: 0 10px 0 10px;
+    margin: 10px 0 10px 0;
+}
+
+.room {
+    text-decoration: none;
+    color: black;
+    display: block;
+    height: 50px;
+    background: #faebd7;
+    border: 1px solid #cebfaa;
+    border-radius: 5px;
+    padding: 0 5px 0 5px;
+    margin-bottom: 10px;
+}
+
+    .room:hover {
+        background: #e4ceb1;
+    }
+
+
+.room-name {
+    font: 16px serif;
+    position: relative;
+    left: 20px;
+}
+
+.room img {
+    width: 32px;
+    height: 32px;
+    position: relative;
+    top: 8px;
+}
+
+#chat-messages {
+    width: 70%;
+    border-left: 1px solid grey;
+    padding: 0 10px 0 10px;
+}
+
+.message {
+    border: 2px solid #dedede;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+.darker {
+    border-color: #ccc;
+    background-color: #ddd;
+}
+
+.message::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.message img {
+    float: left;
+    max-width: 60px;
+    width: 100%;
+    margin-right: 20px;
+    border-radius: 50%;
+}
+
+    .message img.right {
+        float: right;
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+
+.time-right {
+    float: right;
+    color: #aaa;
+}
+
+.time-left {
+    float: left;
+    color: #999;
+}
+
+#place-for-messages, #place-for-rooms {
+    height: calc(100% - 200px);
+    overflow-y: scroll;
+    margin-bottom: 10px;
+}
+
+#place-for-sending-form {
+    position: relative;
+}
+
+#message-text {
+    resize: none;
+    width: calc(100% - 30px);
+    height: 60px;
+    font: 16px serif;
+    padding-left: 10px;
+    border-radius: 5px;
+}
+
+#message-sending-form button[type="submit"] {
+    position: relative;
+    left: calc(100% - 97px);
+}
+
+.delete-message-button {
+    position: relative;
+    left: calc(100% - 15px);
+    padding: 1px 5px 3px 5px;
+    text-align: center;
+    color: #a80000;
+    border: 2px solid #a1a1a1;
+    border-radius: 3px;
+    background-color: #bfbfbf;
+    font-size: 12px;
+    text-decoration: none;
+}
+
+#add-room-button {
+    position: relative;
+    left: calc(100% - 80px);
+    top: 30px;
+    padding: 10px 20px 10px 20px;
+    margin-top: 10px;
+    text-align: center;
+    color: white;
+    border: 2px solid #7eca9a;
+    border-radius: 50%;
+    background-color: #3fad2f;
+    font-size: 30px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+#user-panel {
+    height: 50px;
+    background-color: #e0cfe885;
+    border-bottom: 3px solid #9885a08a;
+    margin-bottom: 20px;
+    padding: 0 5px 0 5px;
+    display: flex;
+}
+
+#user-avatar {
+    background-color: #00a6ff;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+}
+
+#user-name {
+    width: 70%;
+    position: relative;
+    margin-left: 20px;
+    padding-top: 12px;
+    font-size: 25px;
+}
+
+#logout-btn img {
+    padding-top: 9px;
+    width: 32px;
+    height: 32px;
+}
+
+#room-panel {
+    margin-top: 10px;
+    height: 50px;
+    background-color: #e0cfe885;
+    border-bottom: 3px solid #9885a08a;
+    margin-bottom: 20px;
+    padding: 0 5px 0 5px;
+    display: flex;
+}
+
+#room-name {
+    width: 90%;
+    position: relative;
+    margin-left: 20px;
+    padding-top: 12px;
+    font-size: 25px;
+}
+
+#messages-search {
+    height: 50%;
+    width: 100%;
+    margin-top: 12.5px;
+}
+
+#add-companion-button {
+    text-align: center;
+    padding-top: 5px;
+    margin-left: 180px;
+    width: 46px;
+    height: 41px;
+    color: white;
+    border: 2px solid #7eca9a;
+    background-color: #3fad2f;
+    font-size: 30px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+
+#user-activity {
+    color: grey;
+    font: 10px "Times New Roman";
+    width: 250px;
+    margin: 0;
+    padding-left: 20px;
+    padding-top: 10px;
+}
+
+#three-dots-button {
+    width: 50px;
+    height: 50px;
+}
+
+    #three-dots-button > span {
+        cursor: default;
+        color: gray;
+        text-align: center;
+        display: block;
+        font-size: 30px;
+        height: 5px;
+    }
+
+#chat-menu {
+    display: none;
+}
+
+#three-dots-button:hover #chat-menu {
+    display: block;
+    background-color: whitesmoke;
+    list-style: none;
+    padding-left: 25px;
+    margin-top: 20px;
+    width: max-content;
+}
+
+#user-profile {
+    position: relative;
+    top: 100px;
+    padding: 0 300px;
+}
+
+    #user-profile h1 {
+        text-align: center;
+        font-size: 40px;
+        color: #986e0e;
+    }
+
+#user-photo {
+    width: 150px;
+    display: inline-block;
+}
+
+    #user-photo img {
+        margin-left: 25px;
+    }
+
+#user-picture-input {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+#user-photo label {
+    font: 16px "Times New Roman";
+    text-align: center;
+    font-weight: 700;
+    color: #070563;
+    background-color: #00ff4445;
+    display: inline-block;
+    margin-left: 20px;
+    cursor: pointer;
+}
+
+    #user-photo label:hover {
+        background-color: #25a046d9;
+    }
+
+#info-about-user {
+    float: right;
+    width: 70%;
+    border-left: 1px dashed black;
+    padding-left: 20px;
+    padding-right: 150px;
+    background-color: antiquewhite;
+}
+
+.user-info-item-bg {
+    background-color: #f7e2c6;
+}
+
+#change-user-info-form {
+    background-color: #691b9a21;
+}
+
+    #change-user-info-form label {
+        display: block;
+        margin: 10px 0 5px 0;
+    }
+
+    #change-user-info-form textarea {
+        display: block;
+        resize: vertical;
+    }
+
+    #change-user-info-form button {
+        margin-top: 10px;
+    }
+
+/*#endregion */
+
+/*#region Modal window */
+
+/* свойства модального окна по умолчанию */
+.modal {
+    position: fixed;
+    /* фиксированное положение */
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.5);
+    /* цвет фона */
+    z-index: 1050;
+    opacity: 0;
+    /* по умолчанию модальное окно прозрачно */
+    -webkit-transition: opacity 400ms ease-in;
+    -moz-transition: opacity 400ms ease-in;
+    transition: opacity 400ms ease-in;
+    /* анимация перехода */
+    pointer-events: none;
+    /* элемент невидим для событий мыши */
+}
+
+    /* при отображении модального окно */
+    .modal:target {
+        opacity: 1;
+        pointer-events: auto;
+        overflow-y: auto;
+    }
+
+/* ширина модального окна и его отступы от экрана */
+.modal-dialog {
+    position: relative;
+    width: auto;
+    margin: 10px;
+}
+
+@media (min-width: 576px) {
+    .modal-dialog {
+        max-width: 500px;
+        margin: 30px auto;
+    }
+}
+
+/* свойства для блока, содержащего контент модального окна */
+.modal-content {
+    position: relative;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    background-color: #fff;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, .2);
+    border-radius: .3rem;
+    outline: 0;
+}
+
+@media (min-width: 768px) {
+    .modal-content {
+        -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
+    }
+}
+
+/* свойства для заголовка модального окна */
+.modal-header {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    padding: 15px;
+    border-bottom: 1px solid #eceeef;
+}
+
+.modal-title {
+    margin-top: 0;
+    margin-bottom: 0;
+    line-height: 1.5;
+    font-size: 1.25rem;
+    font-weight: 500;
+}
+
+/* свойства для кнопки "Закрыть" */
+.close {
+    float: right;
+    font-family: sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    opacity: .5;
+    text-decoration: none;
+}
+
+    /* свойства для кнопки "Закрыть" при нахождении её в фокусе или наведении */
+    .close:focus,
+    .close:hover {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+        opacity: .75;
+    }
+
+/* свойства для блока, содержащего основное содержимое окна */
+.modal-body {
+    position: relative;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1 1 auto;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    padding: 15px;
+    overflow: auto;
+}
+
+/*#endregion */
+
+/*#region Error */
+
+.error {
+    width: 500px;
+    background-color: rgba(255, 0, 0, 0.31);
+    position: absolute;
+    left: calc(50% - 250px);
+    top: 200px;
+    text-align: center;
+    margin: 0;
+    border: 1px solid red;
+    border-radius: 10px;
+    color: #ffffffad;
+}
+
+/*#endregion */
+
+/*#endregion */

@@ -1,0 +1,34 @@
+﻿@model UserModel
+
+<div id="user-profile">
+    <h1>Информация о профиле</h1>
+    <div id="user-photo">
+        <img style='width:100px; height:100px;' src="data:image/jpeg;base64,@(Convert.ToBase64String(Model.Avatar))" />
+        <input name="avatar" type="file" accept="image/jpeg,image/png" id="user-picture-input" data-multiple-caption="{count} files selected" multiple>
+        <label for="user-picture-input"><span>Загрузить фото</span></label>
+    </div>
+    <div id="info-about-user">
+        <div id="login-details" class="user-info-item-bg">
+            <h2>Данные для входа</h2>
+            <p>Имя пользователя: <span>@Model.UserName</span></p>
+            <p>Пароль: <span>@Model.PassWord</span></p>
+        </div>
+        <div id="about-user" class="user-info-item-bg">
+            <h2>О себе</h2>
+            <p>Дата регистрации: <span>@(Model.RegisterTime)</span> </p>
+            <p>Пол: <span>@(Model.Sex == 'm' ? "Мужской" : "Женский")</span>  </p>
+            <p>@Model.UserInfo</p>
+        </div>
+        <button id="change-user-info">Имзенить</button>
+        <form id="change-user-info-form" asp-controller="Account" asp-action="ChangeProfile" hidden>
+            <p>Введите новые данные (если не хотите что-то менять, то оставьте соответствующее поле пустым)</p>
+            <label for="new-password">Новый пароль</label>
+            <input id="new-password" name="userPass" type="text" placeholder="Введите новый пароль">
+            <label for="new-about-user">О себе:</label>
+            <textarea name="userInfo" id="new-about-user" cols="30" rows="10"></textarea>
+            <button type="submit">Сохранить</button>
+            <button type="button" id="hide-form">Скрыть</button>
+        </form>
+    </div>
+</div>
+<script src="~/js/account.js"></script>

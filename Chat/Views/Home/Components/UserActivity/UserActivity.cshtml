@@ -1,0 +1,37 @@
+﻿@model UserActivityModel
+
+@{
+    string rightDaysDeclension;
+    string rightMessagesDeclansion;
+
+    if (Model.DaysInChat % 10 == 1)
+    {
+        rightDaysDeclension = "день";
+    }
+    else if (Model.DaysInChat % 10 > 1 && Model.DaysInChat % 10 < 5)
+    {
+        rightDaysDeclension = "дня";
+    }
+    else
+    {
+        rightDaysDeclension = "дней";
+    }
+
+    if (Model.AmountWrittedMessages % 10 == 1)
+    {
+        rightMessagesDeclansion = "сообщение";
+    }
+    else if (Model.DaysInChat % 10 > 1 && Model.DaysInChat % 10 < 5)
+    {
+        rightMessagesDeclansion = "сообщения";
+    }
+    else
+    {
+        rightMessagesDeclansion = "сообщений";
+    }
+}
+
+
+    <p id="user-activity">
+        Вы с нами @Model.DaysInChat @rightDaysDeclension и написали @Model.AmountWrittedMessages @rightMessagesDeclansion
+    </p>
